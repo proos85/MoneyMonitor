@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using MoneyMonitor.Pages;
+using MoneyMonitor.ViewModel;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace MoneyMonitor
 {
-	public partial class App : Application
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class App
+    {
 		public App ()
 		{
 			InitializeComponent();
 
-			MainPage = new MoneyMonitor.MainPage();
+		    DependencyService.Register<OverviewViewModel>();
+
+            MainPage = new NavigationPage(new MoneyOverviewPage());
 		}
 
 		protected override void OnStart ()

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyMonitor.Pages.MoneyOverviewPage"
+             Title="Uitgaven">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Order="Primary" Priority="1" />
+    </ContentPage.ToolbarItems>
+    
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="OverviewList"
+                  Header=""
+                  RowHeight="50"
+                  ItemsSource="{Binding MoneyExpenses, Mode=TwoWay}"
+                  IsPullToRefreshEnabled="True"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  CachingStrategy="RecycleElement">
+
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <Label HeightRequest="30"
+                           HorizontalOptions="Fill"
+                           HorizontalTextAlignment="Center"
+                           VerticalOptions="Center"
+                           FontAttributes="Bold"
+                           Text="Overzicht uitgaven"/>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="https://cdn0.iconfinder.com/data/icons/free-business-desktop-icons/256/Money.png"
+                                   HeightRequest="50"
+                                   WidthRequest="50"/>
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding NameExpense, Mode=OneWay}"/>
+                                <Label Text="{Binding TypeExpense, Mode=OneWay}" FontAttributes="Italic"/>
+                            </StackLayout>
+                            <Label HorizontalOptions="EndAndExpand"
+                                   VerticalTextAlignment="Center"
+                                   Margin="0,0,10,0"
+                                   Text="{Binding ValueExpenseString}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+        
+        <StackLayout Grid.Row="1"
+                     BackgroundColor="Accent"/>
+
+    </Grid>
+
+    
+
+</ContentPage>
