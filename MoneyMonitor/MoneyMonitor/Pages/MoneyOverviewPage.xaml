@@ -16,23 +16,11 @@
         </Grid.RowDefinitions>
 
         <ListView x:Name="OverviewList"
-                  Header=""
                   RowHeight="50"
                   ItemsSource="{Binding MoneyExpenses, Mode=TwoWay}"
                   IsPullToRefreshEnabled="True"
                   RefreshCommand="{Binding RefreshCommand}"
                   CachingStrategy="RecycleElement">
-
-            <ListView.HeaderTemplate>
-                <DataTemplate>
-                    <Label HeightRequest="30"
-                           HorizontalOptions="Fill"
-                           HorizontalTextAlignment="Center"
-                           VerticalOptions="Center"
-                           FontAttributes="Bold"
-                           Text="Overzicht uitgaven"/>
-                </DataTemplate>
-            </ListView.HeaderTemplate>
 
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -56,8 +44,11 @@
 
         </ListView>
         
-        <StackLayout Grid.Row="1"
-                     BackgroundColor="Accent"/>
+        <StackLayout Grid.Row="1">
+            <Label HorizontalOptions="Center"
+                   VerticalOptions="CenterAndExpand"
+                   Text="{Binding SumMoneyExpenses, Mode=TwoWay}"/>
+        </StackLayout>
 
     </Grid>
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -18,11 +19,39 @@ namespace MoneyMonitor.ViewModel
                 {
                     _moneyExpenses = value;
                     OnPropertyChanged(nameof(MoneyExpenses));
+
+                    CalculateExpensesSum();
+                }
+            }
+        }
+
+        private string _sumMoneyExpenses;
+        public string SumMoneyExpenses
+        {
+            get => _sumMoneyExpenses;
+            set
+            {
+                if (_sumMoneyExpenses != value)
+                {
+                    _sumMoneyExpenses = value;
+                    OnPropertyChanged(nameof(SumMoneyExpenses));
                 }
             }
         }
 
         public ICommand RefreshCommand { get; set; }
+
+        public OverviewViewModel()
+        {
+            RefreshCommand = new Command(RefreshCommandHandler);
+        }
+
+        private void CalculateExpensesSum()
+        {
+            double sum = MoneyExpenses.Select(x => x.ValueExpense).Count();
+            string currencySum = sum.ToString("C2", new CultureInfo("nl-NL"));
+            SumMoneyExpenses = currencySum;
+        }
 
         private async void RefreshCommandHandler()
         {
@@ -36,11 +65,5 @@ namespace MoneyMonitor.ViewModel
 
             MessagingCenter.Send<object>(this, "RefreshingComplete");
         }
-
-        public OverviewViewModel()
-        {
-            RefreshCommand = new Command(RefreshCommandHandler);
-        }
-
     }
 }
