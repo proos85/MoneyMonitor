@@ -1,4 +1,5 @@
-﻿using MoneyMonitor.Pages;
+﻿using MoneyMonitor.IoC;
+using MoneyMonitor.Pages;
 using MoneyMonitor.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,9 +13,11 @@ namespace MoneyMonitor
 		{
 			InitializeComponent();
 
-		    DependencyService.Register<OverviewViewModel>();
+            IoCContainer.RegisterContainer();
+            DependencyService.Register<OverviewViewModel>();
 
-            MainPage = new NavigationPage(new MoneyOverviewPage());
+		    var moneyOverviewPage = IoCContainer.GetInstance<MoneyOverviewPage>();
+            MainPage = new NavigationPage(moneyOverviewPage);
 		}
 
 		protected override void OnStart ()

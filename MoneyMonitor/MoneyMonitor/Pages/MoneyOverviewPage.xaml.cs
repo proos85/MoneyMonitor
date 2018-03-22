@@ -1,4 +1,6 @@
-﻿using MoneyMonitor.ViewModel;
+﻿using Autofac;
+using MoneyMonitor.Client.Overview;
+using MoneyMonitor.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,9 +9,13 @@ namespace MoneyMonitor.Pages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MoneyOverviewPage
 	{
-		public MoneyOverviewPage ()
+	    private readonly IOverviewClient _overviewClient;
+
+	    public MoneyOverviewPage(IOverviewClient overviewClient)
 		{
-			InitializeComponent ();
+		    _overviewClient = overviewClient;
+
+		    InitializeComponent ();
 
 		    MessagingCenter.Subscribe<object>(this, "RefreshingComplete", sender => ListviewRefreshingComplete());
 
@@ -19,6 +25,8 @@ namespace MoneyMonitor.Pages
 	    protected override void OnAppearing()
 	    {
 	        base.OnAppearing();
+
+	        var expenses = _overviewClient.LoadMoneyExpenses();
 
             var viewModel = DependencyService.Get<OverviewViewModel>();
             viewModel.MoneyExpenses.Add(new MoneyExpenseViewModel { NameExpense = "Uitgave 1", TypeExpense = "Vast", ValueExpense = 100});

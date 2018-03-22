@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,13 +21,11 @@ namespace MoneyMonitor.ViewModel
                 {
                     _moneyExpenses = value;
                     OnPropertyChanged(nameof(MoneyExpenses));
-
-                    CalculateExpensesSum();
                 }
             }
         }
 
-        private string _sumMoneyExpenses;
+        private string _sumMoneyExpenses = 0.ToString("C2", new CultureInfo("nl-NL"));
         public string SumMoneyExpenses
         {
             get => _sumMoneyExpenses;
@@ -43,12 +43,21 @@ namespace MoneyMonitor.ViewModel
 
         public OverviewViewModel()
         {
+            MoneyExpenses.CollectionChanged += MoneyExpensesOnCollectionChanged;
+
             RefreshCommand = new Command(RefreshCommandHandler);
+        }
+
+        private void MoneyExpensesOnCollectionChanged(
+            object sender, 
+            NotifyCollectionChangedEventArgs args)
+        {
+            CalculateExpensesSum();
         }
 
         private void CalculateExpensesSum()
         {
-            double sum = MoneyExpenses.Select(x => x.ValueExpense).Count();
+            double sum = MoneyExpenses.Sum(x => x.ValueExpense);
             string currencySum = sum.ToString("C2", new CultureInfo("nl-NL"));
             SumMoneyExpenses = currencySum;
         }
