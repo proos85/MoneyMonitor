@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -25,27 +23,67 @@ namespace MoneyMonitor.ViewModel
             }
         }
 
-        private string _sumMoneyExpenses = 0.ToString("C2", new CultureInfo("nl-NL"));
-        public string SumMoneyExpenses
+        private string _sumMoneyTotalExpenses = 0.ToString("C2");
+        public string SumMoneyTotalExpenses
         {
-            get => _sumMoneyExpenses;
+            get => _sumMoneyTotalExpenses;
             set
             {
-                if (_sumMoneyExpenses != value)
+                if (_sumMoneyTotalExpenses != value)
                 {
-                    _sumMoneyExpenses = value;
-                    OnPropertyChanged(nameof(SumMoneyExpenses));
+                    _sumMoneyTotalExpenses = value;
+                    OnPropertyChanged(nameof(SumMoneyTotalExpenses));
                 }
             }
         }
 
-        public ICommand RefreshCommand { get; set; }
+        private string _sumMoneyFixedExpenses = 0.ToString("C2");
+        public string SumMoneyFixedExpenses
+        {
+            get => _sumMoneyFixedExpenses;
+            set
+            {
+                if (_sumMoneyFixedExpenses != value)
+                {
+                    _sumMoneyFixedExpenses = value;
+                    OnPropertyChanged(nameof(SumMoneyFixedExpenses));
+                }
+            }
+        }
+
+        private string _sumMoneyVariableExpenses = 0.ToString("C2");
+        public string SumMoneyVariableExpenses
+        {
+            get => _sumMoneyVariableExpenses;
+            set
+            {
+                if (_sumMoneyVariableExpenses != value)
+                {
+                    _sumMoneyVariableExpenses = value;
+                    OnPropertyChanged(nameof(SumMoneyVariableExpenses));
+                }
+            }
+        }
+
+        private string _sumMoneyChiarityExpenses = 0.ToString("C2");
+        public string SumMoneyChiarityExpenses
+        {
+            get => _sumMoneyChiarityExpenses;
+            set
+            {
+                if (_sumMoneyChiarityExpenses != value)
+                {
+                    _sumMoneyChiarityExpenses = value;
+                    OnPropertyChanged(nameof(SumMoneyChiarityExpenses));
+                }
+            }
+        }
+
+        public ICommand RefreshCommand => new Command(RefreshCommandHandler);
 
         public OverviewViewModel()
         {
             MoneyExpenses.CollectionChanged += MoneyExpensesOnCollectionChanged;
-
-            RefreshCommand = new Command(RefreshCommandHandler);
         }
 
         private void MoneyExpensesOnCollectionChanged(
@@ -57,20 +95,22 @@ namespace MoneyMonitor.ViewModel
 
         private void CalculateExpensesSum()
         {
-            double sum = MoneyExpenses.Sum(x => x.ValueExpense);
-            string currencySum = sum.ToString("C2", new CultureInfo("nl-NL"));
-            SumMoneyExpenses = currencySum;
+            SumMoneyTotalExpenses = ConvertToCurrency(MoneyExpenses.Sum(x => x.ValueExpense));
+            SumMoneyFixedExpenses = ConvertToCurrency(MoneyExpenses.Where(x => x.TypeExpense == ExpenseTypes.Fixed).Sum(x => x.ValueExpense));
+            SumMoneyVariableExpenses = ConvertToCurrency(MoneyExpenses.Where(x => x.TypeExpense == ExpenseTypes.Variable).Sum(x => x.ValueExpense));
+            SumMoneyChiarityExpenses = ConvertToCurrency(MoneyExpenses.Where(x => x.TypeExpense == ExpenseTypes.Charity).Sum(x => x.ValueExpense));
+        }
+
+        private string ConvertToCurrency(double value)
+        {
+            return value.ToString("C2");
         }
 
         private async void RefreshCommandHandler()
         {
             await Task.Delay(1000);
 
-            var firstExpense = MoneyExpenses.FirstOrDefault();
-            if (firstExpense != null)
-            {
-                MoneyExpenses.Remove(firstExpense);
-            }
+            // Todo: refresh data
 
             MessagingCenter.Send<object>(this, "RefreshingComplete");
         }

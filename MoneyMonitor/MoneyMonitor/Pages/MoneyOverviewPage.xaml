@@ -1,18 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:MoneyMonitor.ViewModel"
+             xmlns:converter="clr-namespace:MoneyMonitor.Converter"
              x:Class="MoneyMonitor.Pages.MoneyOverviewPage"
              Title="Uitgaven">
     
+    <ContentPage.BindingContext>
+        <viewModel:OverviewViewModel/>
+    </ContentPage.BindingContext>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="+" Order="Primary" Priority="1" />
     </ContentPage.ToolbarItems>
-    
-    <Grid>
-        
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ExpenseTypeToTextConverter x:Key="ExpenseTypeToTextConverter"/>
+
+            <Style x:Key="SummaryLayout" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            </Style>
+            <Style x:Key="SummaryExpenseDescLabel" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+                <Setter Property="VerticalOptions" Value="Start"/>
+            </Style>
+            <Style x:Key="SummaryExpenseValueLabel" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+                <Setter Property="VerticalOptions" Value="Start"/>
+                <Setter Property="Margin" Value="0,0,10,0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowSpacing="0"
+          ColumnSpacing="0">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
         <ListView x:Name="OverviewList"
@@ -31,7 +58,7 @@
                                    WidthRequest="50"/>
                             <StackLayout HorizontalOptions="FillAndExpand">
                                 <Label Text="{Binding NameExpense, Mode=OneWay}"/>
-                                <Label Text="{Binding TypeExpense, Mode=OneWay}" FontAttributes="Italic"/>
+                                <Label Text="{Binding TypeExpense, Mode=OneWay, Converter={StaticResource ExpenseTypeToTextConverter}}" FontAttributes="Italic"/>
                             </StackLayout>
                             <Label HorizontalOptions="EndAndExpand"
                                    VerticalTextAlignment="Center"
@@ -43,15 +70,41 @@
             </ListView.ItemTemplate>
 
         </ListView>
-        
-        <StackLayout Grid.Row="1">
-            <Label HorizontalOptions="Center"
-                   VerticalOptions="CenterAndExpand"
-                   Text="{Binding SumMoneyExpenses, Mode=TwoWay}"/>
-        </StackLayout>
 
+        <Grid Grid.Row="1"
+              RowSpacing="0"
+              ColumnSpacing="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <BoxView Grid.Row="0" HeightRequest="1" Color="Accent"/>
+
+            <StackLayout Grid.Row="1" Padding="5,0">
+
+                <StackLayout Style="{StaticResource SummaryLayout}">
+                    <Label Style="{StaticResource SummaryExpenseDescLabel}" Text="Totaal uitgaven"/>
+                    <Label Style="{StaticResource SummaryExpenseValueLabel}" Text="{Binding SumMoneyTotalExpenses, Mode=OneWay}"/>
+                </StackLayout>
+
+                <StackLayout Style="{StaticResource SummaryLayout}">
+                    <Label Style="{StaticResource SummaryExpenseDescLabel}" Text="Vaste uitgaven"/>
+                    <Label Style="{StaticResource SummaryExpenseValueLabel}" Text="{Binding SumMoneyFixedExpenses, Mode=OneWay}"/>
+                </StackLayout>
+
+                <StackLayout Style="{StaticResource SummaryLayout}">
+                    <Label Style="{StaticResource SummaryExpenseDescLabel}" Text="Variabele uitgaven"/>
+                    <Label Style="{StaticResource SummaryExpenseValueLabel}" Text="{Binding SumMoneyVariableExpenses, Mode=OneWay}"/>
+                </StackLayout>
+                
+                <StackLayout Style="{StaticResource SummaryLayout}">
+                    <Label Style="{StaticResource SummaryExpenseDescLabel}" Text="Goede doelen uitgaven"/>
+                    <Label Style="{StaticResource SummaryExpenseValueLabel}" Text="{Binding SumMoneyChiarityExpenses, Mode=OneWay}"/>
+                </StackLayout>
+
+            </StackLayout>
+        </Grid>
     </Grid>
-
-    
-
 </ContentPage>

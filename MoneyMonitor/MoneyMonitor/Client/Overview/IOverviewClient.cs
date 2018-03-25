@@ -1,17 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using MoneyMonitor.ViewModel;
 
 namespace MoneyMonitor.Client.Overview
 {
     public interface IOverviewClient
     {
-        IList<string> LoadMoneyExpenses();
-    }
-
-    public class MockOverviewClient: IOverviewClient
-    {
-        public IList<string> LoadMoneyExpenses()
-        {
-            return new List<string>{"1", "2"};
-        }
+        Task<IList<MoneyExpenseViewModel>> LoadMoneyExpensesAsync();
     }
 }

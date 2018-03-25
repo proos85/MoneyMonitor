@@ -1,15 +1,14 @@
 ﻿using Autofac;
-using MoneyMonitor.Client.Overview;
-using MoneyMonitor.Pages;
+using MoneyMonitor.IoC.Module;
 
 namespace MoneyMonitor.IoC
 {
-    public static class IoCContainer
+    public static class DependencyContainer
     {
         private static IContainer _iocContainer;
         private static readonly object Padlock = new object();
 
-        public static IContainer IocContainer
+        private static IContainer IocContainer
         {
             get
             {
@@ -39,17 +38,6 @@ namespace MoneyMonitor.IoC
             var container = IocContainer;
             var instance = container.Resolve<T>();
             return instance;
-        }
-    }
-
-    public class AutoFacModuleLoader: Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-            base.Load(builder);
-
-            builder.RegisterType<MockOverviewClient>().As<IOverviewClient>();
-            builder.RegisterType<MoneyOverviewPage>().AsSelf();
         }
     }
 }   
