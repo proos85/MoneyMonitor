@@ -1,22 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using System.Globalization;
+using MoneyMonitor.IoC;
+using MoneyMonitor.Pages;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace MoneyMonitor
 {
-	public partial class App : Application
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class App
+    {
 		public App ()
 		{
 			InitializeComponent();
 
-			MainPage = new MoneyMonitor.MainPage();
+            SetToDutchCulture();
+
+            RegisterDependencies();
+            
+		    SetMainPage();
 		}
 
-		protected override void OnStart ()
+        private static void SetToDutchCulture()
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("nl-NL");
+        }
+
+        private static void RegisterDependencies()
+        {
+            DependencyContainer.RegisterContainer();
+        }
+
+        private void SetMainPage()
+        {
+            MainPage = new NavigationPage(DependencyContainer.GetInstance<MoneyOverviewPage>());
+        }
+
+        protected override void OnStart ()
 		{
 			// Handle when your app starts
 		}
