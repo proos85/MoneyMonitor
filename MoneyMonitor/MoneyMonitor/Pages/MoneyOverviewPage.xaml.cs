@@ -13,6 +13,11 @@ namespace MoneyMonitor.Pages
 	{
 	    private readonly IOverviewClient _overviewClient;
 
+	    public MoneyOverviewPage()
+	    {
+	        InitializeComponent();
+        }
+
 	    public MoneyOverviewPage(IOverviewClient overviewClient)
 		{
 		    _overviewClient = overviewClient;

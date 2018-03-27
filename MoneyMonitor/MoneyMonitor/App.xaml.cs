@@ -32,7 +32,13 @@ namespace MoneyMonitor
 
         private void SetMainPage()
         {
-            MainPage = new NavigationPage(DependencyContainer.GetInstance<MoneyOverviewPage>());
+            var navPage = new NavigationPage(DependencyContainer.GetInstance<MoneyOverviewPage>())
+            {
+                BarBackgroundColor = (Color)Current.Resources["StatusBarBackgroundColor"],
+                BarTextColor = (Color)Current.Resources["StatusBarTextColor"]
+            };
+
+            MainPage = navPage;
         }
 
         protected override void OnStart ()

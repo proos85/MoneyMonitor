@@ -4,7 +4,8 @@
              xmlns:viewModel="clr-namespace:MoneyMonitor.ViewModel"
              xmlns:converter="clr-namespace:MoneyMonitor.Converter"
              x:Class="MoneyMonitor.Pages.MoneyOverviewPage"
-             Title="Uitgaven">
+             Title="Uitgaven"
+             BackgroundColor="{StaticResource PageBackgroundColor}">
     
     <ContentPage.BindingContext>
         <viewModel:OverviewViewModel/>
@@ -47,6 +48,7 @@
                   ItemsSource="{Binding MoneyExpenses, Mode=TwoWay}"
                   IsPullToRefreshEnabled="True"
                   RefreshCommand="{Binding RefreshCommand}"
+                  SeparatorVisibility="None"
                   CachingStrategy="RecycleElement">
 
             <ListView.ItemTemplate>
