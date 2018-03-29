@@ -2,9 +2,18 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoneyMonitor.App">
-	<Application.Resources>
 
-		<!-- Application resource dictionary -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="StatusBarBackgroundColor">#2196F3</Color>
+            <Color x:Key="StatusBarTextColor">#FFFFFF</Color>
+            <Color x:Key="PageBackgroundColor">White</Color>
+            <Color x:Key="PrimaryColor">Black</Color>
+            
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource PrimaryColor}"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
 
-	</Application.Resources>
 </Application>
