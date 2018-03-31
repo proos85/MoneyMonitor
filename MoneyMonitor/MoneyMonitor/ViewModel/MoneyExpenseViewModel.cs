@@ -1,12 +1,7 @@
-﻿namespace MoneyMonitor.ViewModel
-{
-    public enum ExpenseTypes
-    {
-        Fixed,
-        Variable,
-        Charity
-    }
+﻿using MoneyMonitor.Data.Dto;
 
+namespace MoneyMonitor.ViewModel
+{
     public class MoneyExpenseViewModel: BaseViewModel
     {
         public string NameExpense { get; set; }

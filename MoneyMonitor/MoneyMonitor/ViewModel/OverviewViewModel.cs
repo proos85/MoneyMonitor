@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MoneyMonitor.Data.Dto;
 using Xamarin.Forms;
 
 namespace MoneyMonitor.ViewModel

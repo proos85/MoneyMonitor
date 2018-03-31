@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MoneyMonitor.Data.Dto;
 using MoneyMonitor.ViewModel;
 
 namespace MoneyMonitor.Client.Overview.Mock

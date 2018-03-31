@@ -1457,6 +1457,7 @@ namespace MoneyMonitor.Droid
 			global::Microsoft.Identity.Client.Resource.Styleable.ViewStubCompat_android_id = global::MoneyMonitor.Droid.Resource.Styleable.ViewStubCompat_android_id;
 			global::Microsoft.Identity.Client.Resource.Styleable.ViewStubCompat_android_inflatedId = global::MoneyMonitor.Droid.Resource.Styleable.ViewStubCompat_android_inflatedId;
 			global::Microsoft.Identity.Client.Resource.Styleable.ViewStubCompat_android_layout = global::MoneyMonitor.Droid.Resource.Styleable.ViewStubCompat_android_layout;
+			global::ModernHttpClient.Resource.String.library_name = global::MoneyMonitor.Droid.Resource.String.library_name;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::MoneyMonitor.Droid.Resource.Attribute.actionBarSize;
 		}
 		
@@ -5062,8 +5063,8 @@ namespace MoneyMonitor.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f09003e
-			public const int ApplicationName = 2131296318;
+			// aapt resource value: 0x7f09003f
+			public const int ApplicationName = 2131296319;
 			
 			// aapt resource value: 0x7f090015
 			public const int abc_action_bar_home_description = 2131296277;
@@ -5166,6 +5167,9 @@ namespace MoneyMonitor.Droid
 			
 			// aapt resource value: 0x7f090038
 			public const int character_counter_pattern = 2131296312;
+			
+			// aapt resource value: 0x7f09003e
+			public const int library_name = 2131296318;
 			
 			// aapt resource value: 0x7f090000
 			public const int mr_button_content_description = 2131296256;
