@@ -24,7 +24,7 @@ namespace AzureFunctionBackend
                 {
                     new MoneyExpenseDto{NameExpense = "Expense1", TypeExpense = ExpenseTypes.Charity, ValueExpense = 10},
                     new MoneyExpenseDto{NameExpense = "Expense2", TypeExpense = ExpenseTypes.Fixed, ValueExpense = 10},
-                    new MoneyExpenseDto{NameExpense = "Expense2", TypeExpense = ExpenseTypes.Variable, ValueExpense = 10}
+                    new MoneyExpenseDto{NameExpense = "Expense3", TypeExpense = ExpenseTypes.Variable, ValueExpense = 10}
                 };
 
                 return req.CreateResponse(HttpStatusCode.OK, expenses);

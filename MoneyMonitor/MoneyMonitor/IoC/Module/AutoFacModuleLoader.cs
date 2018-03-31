@@ -21,17 +21,18 @@ namespace MoneyMonitor.IoC.Module
 
         private static void RegisterB2CAuthentication(ContainerBuilder builder)
         {
-            builder.RegisterType<B2CAuthenticationProvider>().As<IB2CAuthenticationProvider>();
+            builder.RegisterType<B2CAuthenticationProvider>().As<IB2CAuthenticationProvider>().SingleInstance();
         }
 
         private static void RegisterClients(ContainerBuilder builder)
         {
             builder.RegisterType<MockOverviewClient>().As<IOverviewClient>();
+            //builder.RegisterType<OverviewClient>().As<IOverviewClient>();
         }
 
         private static void RegisterViewModels(ContainerBuilder builder)
         {
-            builder.RegisterType<OverviewViewModel>().AsSelf();
+            builder.RegisterType<OverviewViewModel>().AsSelf().SingleInstance();
         }
 
         private static void RegisterPages(ContainerBuilder builder)

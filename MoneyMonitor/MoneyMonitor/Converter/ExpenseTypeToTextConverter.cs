@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using MoneyMonitor.ViewModel;
+using MoneyMonitor.Data.Dto;
 using Xamarin.Forms;
 
 namespace MoneyMonitor.Converter

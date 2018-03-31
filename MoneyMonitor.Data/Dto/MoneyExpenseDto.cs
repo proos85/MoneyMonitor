@@ -1,4 +1,5 @@
-﻿namespace MoneyMonitor.Data.Dto
+﻿// ReSharper disable UnusedAutoPropertyAccessor.Global
+namespace MoneyMonitor.Data.Dto
 {
     public class MoneyExpenseDto
     {
