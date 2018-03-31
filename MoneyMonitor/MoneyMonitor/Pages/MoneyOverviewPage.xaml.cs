@@ -1,5 +1,6 @@
-﻿using System.Threading.Tasks;
-using Autofac;
+﻿using System;
+using System.Threading.Tasks;
+using MoneyMonitor.Authentication;
 using MoneyMonitor.Client.Overview;
 using MoneyMonitor.IoC;
 using MoneyMonitor.ViewModel;
@@ -12,15 +13,19 @@ namespace MoneyMonitor.Pages
 	public partial class MoneyOverviewPage
 	{
 	    private readonly IOverviewClient _overviewClient;
+	    private readonly IB2CAuthenticationProvider _authenticationProvider;
 
 	    public MoneyOverviewPage()
 	    {
 	        InitializeComponent();
         }
 
-	    public MoneyOverviewPage(IOverviewClient overviewClient)
+	    public MoneyOverviewPage(
+	        IOverviewClient overviewClient,
+	        IB2CAuthenticationProvider authenticationProvider)
 		{
 		    _overviewClient = overviewClient;
+		    _authenticationProvider = authenticationProvider;
 
 		    InitializeComponent();
 
@@ -48,6 +53,12 @@ namespace MoneyMonitor.Pages
 	    private void ListviewRefreshingComplete()
 	    {
 	        OverviewList.IsRefreshing = false;
+	    }
+
+	    private void MenuItem_OnClicked(object sender, EventArgs e)
+	    {
+	        _authenticationProvider.LogoutB2C();
+            App.SetLoginPage();
 	    }
 	}
 }

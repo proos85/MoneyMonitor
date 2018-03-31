@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.MoneyMonitor">
 	<uses-sdk android:minSdkVersion="15" />
-	<application android:label="MoneyMonitor.Android"></application>
+	<application android:label="MoneyMonitor.Android">
+	  <activity android:name="microsoft.identity.client.BrowserTabActivity">
+	    <intent-filter>
+	      <action android:name="android.intent.action.VIEW" />
+	      <category android:name="android.intent.category.DEFAULT" />
+	      <category android:name="android.intent.category.BROWSABLE" />
+	      <data android:scheme="msal1f2ab3e0-9e64-4043-94b2-35bd249fd7ea" android:host="auth" />
+	    </intent-filter>
+	  </activity>
+  </application>
 </manifest>

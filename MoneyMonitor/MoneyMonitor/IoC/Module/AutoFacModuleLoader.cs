@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using MoneyMonitor.Authentication;
 using MoneyMonitor.Client.Overview;
 using MoneyMonitor.Client.Overview.Mock;
 using MoneyMonitor.Pages;
@@ -12,9 +13,15 @@ namespace MoneyMonitor.IoC.Module
         {
             base.Load(builder);
 
+            RegisterB2CAuthentication(builder);
             RegisterClients(builder);
             RegisterViewModels(builder);
             RegisterPages(builder);
+        }
+
+        private static void RegisterB2CAuthentication(ContainerBuilder builder)
+        {
+            builder.RegisterType<B2CAuthenticationProvider>().As<IB2CAuthenticationProvider>();
         }
 
         private static void RegisterClients(ContainerBuilder builder)
@@ -29,8 +36,8 @@ namespace MoneyMonitor.IoC.Module
 
         private static void RegisterPages(ContainerBuilder builder)
         {
+            builder.RegisterType<LoginPage>().AsSelf();
             builder.RegisterType<MoneyOverviewPage>().AsSelf();
-            
         }
     }
 }

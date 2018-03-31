@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using Microsoft.Identity.Client;
 using MoneyMonitor.IoC;
 using MoneyMonitor.Pages;
 using Xamarin.Forms;
@@ -9,16 +10,34 @@ namespace MoneyMonitor
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class App
     {
-		public App ()
+        public static UIParent UiParent = null;
+
+        public App ()
 		{
 			InitializeComponent();
 
             SetToDutchCulture();
 
             RegisterDependencies();
-            
-		    SetMainPage();
+
+		    SetLoginPage();
 		}
+
+        public static void SetLoginPage()
+        {
+            Current.MainPage = DependencyContainer.GetInstance<LoginPage>();
+        }
+
+        public static void SetMainPage()
+        {
+            var navPage = new NavigationPage(DependencyContainer.GetInstance<MoneyOverviewPage>())
+            {
+                BarBackgroundColor = (Color)Current.Resources["StatusBarBackgroundColor"],
+                BarTextColor = (Color)Current.Resources["StatusBarTextColor"]
+            };
+
+            Current.MainPage = navPage;
+        }
 
         private static void SetToDutchCulture()
         {
@@ -28,17 +47,6 @@ namespace MoneyMonitor
         private static void RegisterDependencies()
         {
             DependencyContainer.RegisterContainer();
-        }
-
-        private void SetMainPage()
-        {
-            var navPage = new NavigationPage(DependencyContainer.GetInstance<MoneyOverviewPage>())
-            {
-                BarBackgroundColor = (Color)Current.Resources["StatusBarBackgroundColor"],
-                BarTextColor = (Color)Current.Resources["StatusBarTextColor"]
-            };
-
-            MainPage = navPage;
         }
 
         protected override void OnStart ()
