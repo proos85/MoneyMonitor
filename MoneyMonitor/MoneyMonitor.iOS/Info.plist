@@ -5,23 +5,17 @@
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
-		<integer>2</integer>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>11.2</string>
+	<string>10.0</string>
 	<key>CFBundleDisplayName</key>
 	<string>MoneyMonitor</string>
 	<key>CFBundleIdentifier</key>
@@ -50,5 +44,18 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>MoneyMonitor</string>
+	<key>CFBundleURLTypes</key>  
+	<array>  
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.yourcompany.MoneyMonitor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>msal1f2ab3e0-9e64-4043-94b2-35bd249fd7ea</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
