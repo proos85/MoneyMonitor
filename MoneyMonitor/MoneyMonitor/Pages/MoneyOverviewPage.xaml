@@ -13,6 +13,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="+" Order="Primary" Priority="1" />
+        <ToolbarItem Text="Logout" Order="Primary" Priority="1" Clicked="MenuItem_OnClicked" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
