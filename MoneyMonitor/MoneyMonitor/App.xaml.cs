@@ -20,7 +20,7 @@ namespace MoneyMonitor
 
             RegisterDependencies();
 
-		    SetLoginPage();
+		    SetSplashScreen();
 		}
 
         public static void SetLoginPage()
@@ -37,6 +37,11 @@ namespace MoneyMonitor
             };
 
             Current.MainPage = navPage;
+        }
+
+        void SetSplashScreen()
+        {
+            MainPage = DependencyContainer.GetInstance<SplashPage>();
         }
 
         private static void SetToDutchCulture()

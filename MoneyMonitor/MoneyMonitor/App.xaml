@@ -1,10 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              x:Class="MoneyMonitor.App">
 
     <Application.Resources>
         <ResourceDictionary>
+            <Color x:Key="Primary">#059bbf</Color>
+            <Color x:Key="PrimaryDark">#059bbf</Color>
+            <Color x:Key="Accent">#059bbf</Color>
+
             <Color x:Key="StatusBarBackgroundColor">#2196F3</Color>
             <Color x:Key="StatusBarTextColor">#FFFFFF</Color>
             <Color x:Key="PageBackgroundColor">White</Color>
@@ -13,6 +18,15 @@
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource PrimaryColor}"/>
             </Style>
+            <Style TargetType="Label" x:Key="LargeLabel">
+                <Setter Property="FontSize" Value="Large"/>
+            </Style>
+
+            <Style TargetType="forms:AnimationView">
+                <Setter Property="AutoPlay" Value="True"/>
+                <Setter Property="Loop" Value="True"/>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 

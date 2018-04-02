@@ -31,16 +31,6 @@ namespace MoneyMonitor.Pages
 	        if (!hasAccess)
 	        {
 	            hasAccess = await _authenticationProvider.AuthorizeWithB2CAsync();
-	            if (!hasAccess)
-	            {
-	                await DisplayAlert("No Access", "No Access", "OK");
-	            }
-	        }
-
-	        if (hasAccess)
-	        {
-	            await DisplayAlert("HasAccess", $"HasAccess: {_authenticationProvider.AuthenticationResult?.AccessToken}", "OK");
-	            await DisplayAlert("HasAccess", $"HasAccess: {_authenticationProvider.AuthenticationResult?.UniqueId}", "OK");
 	        }
 
 	        return hasAccess;

@@ -1,4 +1,5 @@
 ﻿using MoneyMonitor.Data.Dto;
+using MoneyMonitor.ViewModel.Base;
 
 namespace MoneyMonitor.ViewModel
 {

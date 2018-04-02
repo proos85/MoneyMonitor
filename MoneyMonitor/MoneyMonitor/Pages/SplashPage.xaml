@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="MoneyMonitor.Pages.SplashPage">
+
+    <Grid>
+        <Grid>
+            <forms:AnimationView Animation="loader.json"  />
+        </Grid>
+        <Grid x:Name="SplashGrid" BackgroundColor="{StaticResource Primary}">
+
+            <Image x:Name="Logo" Source="logo" HorizontalOptions="Center" VerticalOptions="Center">
+                <Image.TranslationY>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android" Value="-12"/>
+                    </OnPlatform>
+                </Image.TranslationY>
+            </Image>
+
+        </Grid>
+    </Grid>
+
+</ContentPage>

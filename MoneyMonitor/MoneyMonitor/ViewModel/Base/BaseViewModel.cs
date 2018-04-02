@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using MoneyMonitor.Annotations;
 
-namespace MoneyMonitor.ViewModel
+namespace MoneyMonitor.ViewModel.Base
 {
     public abstract class BaseViewModel: INotifyPropertyChanged
     {
