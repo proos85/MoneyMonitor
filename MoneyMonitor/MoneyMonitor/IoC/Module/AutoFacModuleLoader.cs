@@ -32,11 +32,14 @@ namespace MoneyMonitor.IoC.Module
 
         private static void RegisterViewModels(ContainerBuilder builder)
         {
+            builder.RegisterType<SplashViewModel>().AsSelf().SingleInstance();
             builder.RegisterType<OverviewViewModel>().AsSelf().SingleInstance();
+            builder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
         }
 
         private static void RegisterPages(ContainerBuilder builder)
         {
+            builder.RegisterType<SplashPage>().AsSelf();
             builder.RegisterType<LoginPage>().AsSelf();
             builder.RegisterType<MoneyOverviewPage>().AsSelf();
         }
