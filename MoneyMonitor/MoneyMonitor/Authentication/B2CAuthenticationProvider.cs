@@ -10,6 +10,7 @@ namespace MoneyMonitor.Authentication
     // ReSharper disable once ClassNeverInstantiated.Global
     public class B2CAuthenticationProvider : IB2CAuthenticationProvider
     {
+        private readonly ICookie _cookies;
         private PublicClientApplication _b2CApplication;
 
         // Azure AD B2C Coordinates
@@ -23,8 +24,9 @@ namespace MoneyMonitor.Authentication
 
         public AuthenticationResult AuthenticationResult { get; private set; }
 
-        public B2CAuthenticationProvider()
+        public B2CAuthenticationProvider(ICookie cookies)
         {
+            _cookies = cookies;
             _authority = $"{_authorityBase}{PolicySignIn}";
 
             Initialize();
@@ -75,6 +77,8 @@ namespace MoneyMonitor.Authentication
             {
                 _b2CApplication.Remove(user);
             }
+
+            _cookies.RemoveCookies();
         }
 
         void Initialize()

@@ -37,6 +37,7 @@ namespace MoneyMonitor.IoC
         {
             var container = IocContainer;
             var instance = container.Resolve<T>();
+
             return instance;
         }
     }

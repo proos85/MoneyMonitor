@@ -4,6 +4,7 @@ using MoneyMonitor.Client.Overview;
 using MoneyMonitor.Client.Overview.Mock;
 using MoneyMonitor.Pages;
 using MoneyMonitor.ViewModel;
+using Xamarin.Forms;
 
 namespace MoneyMonitor.IoC.Module
 {
@@ -13,10 +14,16 @@ namespace MoneyMonitor.IoC.Module
         {
             base.Load(builder);
 
+            RegisterDependencyServices(builder);
             RegisterB2CAuthentication(builder);
             RegisterClients(builder);
             RegisterViewModels(builder);
             RegisterPages(builder);
+        }
+
+        private void RegisterDependencyServices(ContainerBuilder builder)
+        {
+            builder.RegisterInstance(DependencyService.Get<ICookie>()).As<ICookie>().SingleInstance();
         }
 
         private static void RegisterB2CAuthentication(ContainerBuilder builder)
