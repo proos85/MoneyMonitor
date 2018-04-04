@@ -1,43 +1,31 @@
-using System;
-using System.Collections.Generic;
+#r "Microsoft.WindowsAzure.Storage"
+
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
-using MoneyMonitor.Data.Dto;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace AzureFunctionBackend
 {
     public static class MoneyMonitorGetExpensesFunction
     {
         [FunctionName("MoneyMonitorGetExpensesFunction")]
-        public static HttpResponseMessage Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)]HttpRequestMessage req,
-            TraceWriter log)
+        public static HttpResponseMessage Run(HttpRequestMessage req, IQueryable<Person> inTable, TraceWriter log)
         {
-            try
+            var query = from person in inTable select person;
+            foreach (Person person in query)
             {
-                log.Info("MoneyMonitorGetExpensesFunction start");
-
-                var expenses = new List<MoneyExpenseDto>
-                {
-                    new MoneyExpenseDto{NameExpense = "Expense1", TypeExpense = ExpenseTypes.Charity, ValueExpense = 10},
-                    new MoneyExpenseDto{NameExpense = "Expense2", TypeExpense = ExpenseTypes.Fixed, ValueExpense = 10},
-                    new MoneyExpenseDto{NameExpense = "Expense3", TypeExpense = ExpenseTypes.Variable, ValueExpense = 10}
-                };
-
-                return req.CreateResponse(HttpStatusCode.OK, expenses);
+                log.Info($"Name:{person.Name}");
             }
-            catch (Exception)
-            {
-                // Todo: Write exception to log
-                return req.CreateResponse(HttpStatusCode.BadRequest);
-            }
-            finally
-            {
-                log.Info("MoneyMonitorGetExpensesFunction end");
-            }
+            return req.CreateResponse(HttpStatusCode.OK, inTable.ToList());
         }
+    }
+
+    public class Person : TableEntity
+    {
+        public string Name { get; set; }
+        public string Testje { get; set; }
     }
 }
