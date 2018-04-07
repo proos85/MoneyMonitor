@@ -32,14 +32,16 @@ namespace MoneyMonitor.Client.Overview
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _authenticationProvider.AuthenticationResult.AccessToken);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "api/MoneyMonitorGetExpensesFunction?code=8/qh9MN5PTaxb/qnz0/4QA9TNiO/ZdABcJ4Zo7sOfJq4/7xV8qzjvA==");
+                var requestMessage = new HttpRequestMessage(HttpMethod.Get, "api/GetExpenses?code=u5ozYH9TTsCTmXwod5UjP4IALqDaZaJuB2b9RonvxTbCzD28reLvaA==");
                 var response = await client.SendAsync(requestMessage).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
 
                 var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                var dto = JsonConvert.DeserializeObject<IEnumerable<MoneyExpenseDto>>(responseContent);
                
                 var vm = new List<MoneyExpenseViewModel>();
-                vm.AddRange(JsonConvert.DeserializeObject<IEnumerable<MoneyExpenseDto>>(responseContent)
+                vm.AddRange(dto
                     .Select(x => new MoneyExpenseViewModel
                     {
                         NameExpense = x.NameExpense,
