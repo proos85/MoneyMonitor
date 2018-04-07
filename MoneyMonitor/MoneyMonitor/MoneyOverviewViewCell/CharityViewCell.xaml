@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:MoneyMonitor.ViewModel;assembly=MoneyMonitor"
+             xmlns:converter="clr-namespace:MoneyMonitor.Converter"
+             x:Class="MoneyMonitor.MoneyOverviewViewCell.CharityViewCell">
+
+    <ViewCell.BindingContext>
+        <viewModel:MoneyExpenseViewModel/>
+    </ViewCell.BindingContext>
+
+    <StackLayout Orientation="Horizontal">
+        <StackLayout.Resources>
+            <ResourceDictionary>
+                <converter:ExpenseTypeToTextConverter x:Key="ExpenseTypeToTextConverter"/>
+            </ResourceDictionary>
+        </StackLayout.Resources>
+
+        <Image Source="https://cdn0.iconfinder.com/data/icons/free-business-desktop-icons/256/Money.png"
+               HeightRequest="50"
+               WidthRequest="50"/>
+        <StackLayout HorizontalOptions="FillAndExpand">
+            <Label Text="{Binding NameExpense, Mode=OneWay}"/>
+            <Label Text="{Binding TypeExpense, Mode=OneWay, Converter={StaticResource ExpenseTypeToTextConverter}}" FontAttributes="Italic"/>
+        </StackLayout>
+        <Label HorizontalOptions="EndAndExpand"
+               VerticalTextAlignment="Center"
+               Margin="0,0,10,0"
+               Text="{Binding ValueExpenseString}"/>
+    </StackLayout>
+
+</ViewCell>

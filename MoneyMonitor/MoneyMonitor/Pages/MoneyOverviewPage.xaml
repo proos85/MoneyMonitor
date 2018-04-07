@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:MoneyMonitor.ViewModel"
              xmlns:converter="clr-namespace:MoneyMonitor.Converter"
+             xmlns:selector="clr-namespace:MoneyMonitor.MoneyOverviewViewCell.Selector;assembly=MoneyMonitor"
              x:Class="MoneyMonitor.Pages.MoneyOverviewPage"
              Title="Uitgaven"
              BackgroundColor="{StaticResource PageBackgroundColor}">
@@ -19,6 +20,8 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:ExpenseTypeToTextConverter x:Key="ExpenseTypeToTextConverter"/>
+            <selector:OverviewTemplateSelector x:Key="OverviewTemplateSelector"/>
+            
 
             <Style x:Key="SummaryLayout" TargetType="StackLayout">
                 <Setter Property="Orientation" Value="Horizontal"/>
@@ -50,9 +53,10 @@
                   IsPullToRefreshEnabled="True"
                   RefreshCommand="{Binding RefreshCommand}"
                   SeparatorVisibility="None"
-                  CachingStrategy="RecycleElement">
+                  CachingStrategy="RecycleElement"
+                  ItemTemplate="{StaticResource OverviewTemplateSelector}">
 
-            <ListView.ItemTemplate>
+            <!--<ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
@@ -70,7 +74,7 @@
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
-            </ListView.ItemTemplate>
+            </ListView.ItemTemplate>-->
 
         </ListView>
 

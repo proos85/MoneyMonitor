@@ -33,8 +33,8 @@ namespace MoneyMonitor.IoC.Module
 
         private static void RegisterClients(ContainerBuilder builder)
         {
-            builder.RegisterType<MockOverviewClient>().As<IOverviewClient>();
-            //builder.RegisterType<OverviewClient>().As<IOverviewClient>();
+            //builder.RegisterType<MockOverviewClient>().As<IOverviewClient>();
+            builder.RegisterType<OverviewClient>().As<IOverviewClient>();
         }
 
         private static void RegisterViewModels(ContainerBuilder builder)
