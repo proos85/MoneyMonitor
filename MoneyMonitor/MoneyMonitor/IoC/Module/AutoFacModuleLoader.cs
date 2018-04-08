@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using MoneyMonitor.Authentication;
 using MoneyMonitor.Client.Overview;
-using MoneyMonitor.Client.Overview.Mock;
+using MoneyMonitor.LocalStorage;
 using MoneyMonitor.Pages;
 using MoneyMonitor.ViewModel;
 using Xamarin.Forms;
@@ -24,6 +24,7 @@ namespace MoneyMonitor.IoC.Module
         private void RegisterDependencyServices(ContainerBuilder builder)
         {
             builder.RegisterInstance(DependencyService.Get<ICookie>()).As<ICookie>().SingleInstance();
+            builder.RegisterInstance(DependencyService.Get<ILocalSqlLiteConnectionPath>()).As<ILocalSqlLiteConnectionPath>().SingleInstance();
         }
 
         private static void RegisterB2CAuthentication(ContainerBuilder builder)

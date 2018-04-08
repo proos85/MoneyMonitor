@@ -1,46 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using MoneyMonitor.Data.Dto;
-using MoneyMonitor.ViewModel;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Threading.Tasks;
+//using MoneyMonitor.Data.Dto;
+//using MoneyMonitor.ViewModel;
 
-namespace MoneyMonitor.Client.Overview.Mock
-{
-    // ReSharper disable once ClassNeverInstantiated.Global
-    public class MockOverviewClient: IOverviewClient
-    {
-        public async Task<IList<MoneyExpenseViewModel>> LoadMoneyExpensesAsync()
-        {
-            await Task.Delay(500).ConfigureAwait(false);
+//namespace MoneyMonitor.Client.Overview.Mock
+//{
+//    // ReSharper disable once ClassNeverInstantiated.Global
+//    public class MockOverviewClient: IOverviewClient
+//    {
+//        public async Task<IList<MoneyExpenseViewModel>> LoadLocalMoneyExpensesAsync()
+//        {
+//            await Task.Delay(500).ConfigureAwait(false);
 
-            var result = new List<MoneyExpenseViewModel>();
+//            var result = new List<MoneyExpenseViewModel>();
 
-            var rnd = new Random();
-            int numExpenses = rnd.Next(0, 100);
-            for (int i = 0; i < numExpenses; i++)
-            {
-                result.Add(new MoneyExpenseViewModel
-                {
-                    NameExpense = $"Uitgave {i+1}",
-                    TypeExpense = GetExpenseType(rnd),
-                    ValueExpense = rnd.Next(0, 500)
-                });
-            }
+//            var rnd = new Random();
+//            int numExpenses = rnd.Next(0, 100);
+//            for (int i = 0; i < numExpenses; i++)
+//            {
+//                result.Add(new MoneyExpenseViewModel
+//                {
+//                    NameExpense = $"Uitgave {i+1}",
+//                    TypeExpense = GetExpenseType(rnd),
+//                    ValueExpense = rnd.Next(0, 500)
+//                });
+//            }
 
-            return result;
-        }
+//            return result;
+//        }
 
-        private ExpenseTypes GetExpenseType(Random rnd)
-        {
-            var nextTypeId = rnd.Next(0, 5000);
+//        public Task<IList<MoneyExpenseViewModel>> LoadRemoteMoneyExpensesAsync()
+//        {
+//            throw new NotImplementedException();
+//        }
 
-            if (nextTypeId < 2000)
-                return ExpenseTypes.Fixed;
+//        private ExpenseTypes GetExpenseType(Random rnd)
+//        {
+//            var nextTypeId = rnd.Next(0, 5000);
 
-            if (nextTypeId < 4000)
-                return ExpenseTypes.Variable;
+//            if (nextTypeId < 2000)
+//                return ExpenseTypes.Fixed;
 
-            return ExpenseTypes.Charity;
-        }
-    }
-}
+//            if (nextTypeId < 4000)
+//                return ExpenseTypes.Variable;
+
+//            return ExpenseTypes.Charity;
+//        }
+//    }
+//}

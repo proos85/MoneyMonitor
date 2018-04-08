@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using MoneyMonitor.Authentication;
-using MoneyMonitor.Client.Overview;
 using MoneyMonitor.IoC;
 using MoneyMonitor.ViewModel;
 using Xamarin.Forms;
@@ -12,7 +11,7 @@ namespace MoneyMonitor.Pages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MoneyOverviewPage
 	{
-	    private readonly IOverviewClient _overviewClient;
+	    //private readonly IOverviewClient _overviewClient;
 	    private readonly IB2CAuthenticationProvider _authenticationProvider;
 
 	    public MoneyOverviewPage()
@@ -21,10 +20,10 @@ namespace MoneyMonitor.Pages
         }
 
 	    public MoneyOverviewPage(
-	        IOverviewClient overviewClient,
+	        /*IOverviewClient overviewClient,*/
 	        IB2CAuthenticationProvider authenticationProvider)
 		{
-		    _overviewClient = overviewClient;
+		    //_overviewClient = overviewClient;
 		    _authenticationProvider = authenticationProvider;
 
 		    InitializeComponent();
@@ -43,11 +42,11 @@ namespace MoneyMonitor.Pages
 
 	    private async Task LoadExpensesAsync()
 	    {
-	        var vm = (OverviewViewModel) BindingContext;
-            foreach (var expense in await _overviewClient.LoadMoneyExpensesAsync())
-	        {
-	            vm.MoneyExpenses.Add(expense);
-	        }
+            await Task.Run(() =>
+            {
+                var vm = (OverviewViewModel)BindingContext;
+                vm.RetrieveExpensesCommand.Execute(null);
+            });
 	    }
 
 	    private void ListviewRefreshingComplete()

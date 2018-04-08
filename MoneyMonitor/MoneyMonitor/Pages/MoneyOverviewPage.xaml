@@ -8,10 +8,6 @@
              Title="Uitgaven"
              BackgroundColor="{StaticResource PageBackgroundColor}">
     
-    <ContentPage.BindingContext>
-        <viewModel:OverviewViewModel/>
-    </ContentPage.BindingContext>
-
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="+" Order="Primary" Priority="1" />
         <ToolbarItem Text="Logout" Order="Primary" Priority="1" Clicked="MenuItem_OnClicked" />

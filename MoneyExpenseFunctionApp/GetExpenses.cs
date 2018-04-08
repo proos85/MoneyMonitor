@@ -28,6 +28,7 @@ namespace MoneyExpenseFunctionApp
                     .ToList()
                     .Select(x => new MoneyExpenseDto
                     {
+                        Id = x.RowKey,
                         NameExpense = x.NameExpense,
                         ValueExpense = x.ValueExpense,
                         TypeExpense = (ExpenseTypes) x.TypeExpenseValue
