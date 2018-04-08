@@ -6,6 +6,7 @@ namespace MoneyMonitor.Client.Overview
 {
     public interface IOverviewClient
     {
-        Task<IList<MoneyExpenseViewModel>> LoadMoneyExpensesAsync();
+        Task<IList<MoneyExpenseViewModel>> LoadLocalMoneyExpensesAsync();
+        Task<IList<MoneyExpenseViewModel>> RetrieveRemoteAndSyncWithLocalOne();
     }
 }
